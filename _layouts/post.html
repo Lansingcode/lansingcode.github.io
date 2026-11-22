@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<article class="article h-entry">
+  <a class="article-back" href="{{ '/archive/' | relative_url }}">文章归档</a>
+  <header class="article-header">
+    {% include news-meta.html post=page %}
+    <h1 class="p-name">{{ page.title | escape }}</h1>
+  </header>
+  <div class="article-content e-content">{{ content }}</div>
+  {% if page.previous or page.next %}
+  <nav class="article-nav" aria-label="相邻文章">
+    {% if page.previous %}
+    <a href="{{ page.previous.url | relative_url }}"><span>上一篇</span>{{ page.previous.title | escape }}</a>
+    {% endif %}
+    {% if page.next %}
+    <a href="{{ page.next.url | relative_url }}"><span>下一篇</span>{{ page.next.title | escape }}</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</article>

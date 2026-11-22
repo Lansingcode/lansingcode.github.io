@@ -1,0 +1,34 @@
+---
+layout: default
+title: 文章归档
+permalink: /archive/
+---
+
+<div class="archive">
+  <div class="masthead">
+    <h1>{{ page.title }}</h1>
+    <p>按主题查看全部 {{ site.posts.size }} 篇文章。</p>
+  </div>
+  {% assign groups = site.posts | group_by: 'topic' | sort: 'name' %}
+  <nav class="archive-topics" aria-label="归档主题">
+    {% for group in groups %}
+    <a href="#topic-{{ forloop.index }}">{{ group.name | default: '未分类' | escape }}</a>
+    {% endfor %}
+  </nav>
+  {% for group in groups %}
+  <section class="archive-section" id="topic-{{ forloop.index }}">
+    <div class="section-bar">
+      <h2>{{ group.name | default: '未分类' | escape }}</h2>
+      <span class="topic-count">{{ group.size }} 篇</span>
+    </div>
+    <ul class="archive-list">
+      {% for post in group.items %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>

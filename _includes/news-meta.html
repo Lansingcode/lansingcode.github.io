@@ -1,0 +1,4 @@
+<div class="news-meta">
+  {% if include.post.topic %}<span class="topic-label">{{ include.post.topic | escape }}</span>{% endif %}
+  <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
+</div>

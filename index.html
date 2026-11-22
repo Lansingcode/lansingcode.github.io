@@ -2,24 +2,59 @@
 layout: default
 ---
 
-<section class="blog-intro" aria-labelledby="blog-title">
+<section class="masthead" aria-labelledby="blog-title">
   <h1 id="blog-title">{{ site.title | escape }}</h1>
   <p>{{ site.description | escape }}</p>
 </section>
 
-<section aria-labelledby="latest-title">
-  <h2 id="latest-title" class="section-heading">最新文章</h2>
-  <ul class="news-list">
-    {% for post in site.posts %}
-    <li>
-      <div class="news-meta">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
-        {% if post.topic %}<span>{{ post.topic | escape }}</span>{% endif %}
-      </div>
-      <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
-      <p>{{ post.excerpt | strip_html | strip | escape }}</p>
-    </li>
-    {% endfor %}
-  </ul>
-  <a class="feed-link" href="{{ '/feed.xml' | relative_url }}">RSS 订阅</a>
-</section>
+{% assign lead = site.posts | where: 'featured', true | first | default: site.posts.first %}
+{% if lead %}
+<article class="lead-story" aria-labelledby="lead-title">
+  <div class="lead-copy">
+    <p class="lead-label">头条</p>
+    <h2 id="lead-title"><a href="{{ lead.url | relative_url }}">{{ lead.title | escape }}</a></h2>
+    <p class="lead-summary">{{ lead.excerpt | strip_html | strip | escape }}</p>
+    {% include news-meta.html post=lead %}
+  </div>
+  <div class="lead-art" aria-hidden="true">
+    <span class="orbit orbit-outer"></span>
+    <span class="orbit orbit-middle"></span>
+    <span class="orbit orbit-inner"></span>
+    <span class="orbit-core"></span>
+  </div>
+</article>
+{% endif %}
+
+{% assign groups = site.posts | group_by: 'topic' | sort: 'name' %}
+<div class="news-grid">
+  <section aria-labelledby="latest-title">
+    <div class="section-bar">
+      <h2 id="latest-title">最新文章</h2>
+      <a href="{{ '/archive/' | relative_url }}">全部文章</a>
+    </div>
+    <ul class="news-list">
+      {% assign displayed = 0 %}
+      {% for post in site.posts %}
+        {% if post.url == lead.url %}{% continue %}{% endif %}
+        {% if displayed == 6 %}{% break %}{% endif %}
+        {% assign displayed = displayed | plus: 1 %}
+        <li>
+          {% include news-meta.html post=post %}
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+          <p>{{ post.excerpt | strip_html | strip | escape }}</p>
+        </li>
+      {% endfor %}
+      {% if displayed == 0 %}<li>暂无更多文章。</li>{% endif %}
+    </ul>
+  </section>
+
+  <aside class="topic-panel" aria-labelledby="topic-title">
+    <h2 id="topic-title">按主题浏览</h2>
+    <ul class="topic-list">
+      {% for group in groups %}
+      <li><a href="{{ '/archive/' | relative_url }}#topic-{{ forloop.index }}"><span>{{ group.name | default: '未分类' | escape }}</span><span class="topic-count">{{ group.size }} 篇</span></a></li>
+      {% endfor %}
+    </ul>
+    <a class="rss-link" href="{{ '/feed.xml' | relative_url }}">RSS 订阅</a>
+  </aside>
+</div>
