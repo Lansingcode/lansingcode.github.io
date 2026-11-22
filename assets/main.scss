@@ -1,0 +1,41 @@
+---
+---
+@import "minima";
+
+body {
+  color: #122537;
+  background: #f7f9fb;
+}
+
+.site-header {
+  border-top: 4px solid #107469;
+  border-bottom-color: #d8e1e8;
+}
+
+.site-title, .site-title:visited { color: #122537; font-weight: 700; }
+a, a:visited { color: #126859; }
+
+.blog-intro {
+  background: #132c3d;
+  color: #f3fafc;
+  padding: clamp(1.6rem, 5vw, 3.4rem);
+  margin-bottom: 2.25rem;
+  border-radius: .7rem;
+}
+
+.blog-intro h1 {
+  font-size: clamp(2.5rem, 8vw, 4.2rem);
+  line-height: 1.12;
+  font-weight: 750;
+  margin: .6rem 0 1rem;
+}
+
+.blog-intro p { margin-bottom: 0; }
+.section-heading { font-size: 1.4rem; font-weight: 700; }
+.news-list { margin-left: 0; list-style: none; }
+.news-list li { border-top: 1px solid #d8e1e8; padding: 1.2rem 0; }
+.news-list h3 { font-size: 1.2rem; font-weight: 700; margin: .25rem 0 .4rem; }
+.news-list p { margin: 0; }
+.news-meta { display: flex; flex-wrap: wrap; gap: .7rem; color: #475d6d; font-size: .9rem; }
+.feed-link { font-size: .9rem; }
+.post-title { font-weight: 700; line-height: 1.25; letter-spacing: normal; }

@@ -1,0 +1,14 @@
+title: AI 观察
+description: 记录值得关注的人工智能新闻和产品更新。
+lang: zh-CN
+timezone: Asia/Shanghai
+url: https://lansingcode.github.io
+baseurl: ""
+theme: minima
+plugins:
+  - jekyll-feed
+header_pages:
+  - about.md
+permalink: /:year/:month/:day/:title/
+exclude:
+  - README.md

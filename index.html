@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<section class="blog-intro" aria-labelledby="blog-title">
+  <h1 id="blog-title">{{ site.title | escape }}</h1>
+  <p>{{ site.description | escape }}</p>
+</section>
+
+<section aria-labelledby="latest-title">
+  <h2 id="latest-title" class="section-heading">最新文章</h2>
+  <ul class="news-list">
+    {% for post in site.posts %}
+    <li>
+      <div class="news-meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
+        {% if post.topic %}<span>{{ post.topic | escape }}</span>{% endif %}
+      </div>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+      <p>{{ post.excerpt | strip_html | strip | escape }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  <a class="feed-link" href="{{ '/feed.xml' | relative_url }}">RSS 订阅</a>
+</section>

@@ -1,2 +1,24 @@
-# lansingcode.github.io
-AI 观察 · 人工智能新闻与产品更新
+# AI 观察
+
+一个使用 Jekyll Minima 主题的中文博客。GitHub Pages 发布时从 `main` 分支的根目录构建。
+
+## 编辑或新增文章
+
+在 GitHub 仓库里打开 `_posts`。修改已有的 Markdown 文件并提交。新增文章时，可以复制一篇现有文章，把新文件命名为 `YYYY-MM-DD-英文短名.md`，再修改标题、日期、分类和正文。
+
+```markdown
+---
+layout: post
+title: "文章标题"
+date: 2026-11-22 12:00:00 +0800
+topic: 行业动态
+---
+
+第一段会显示在首页作为摘要。
+
+从这里继续写正文。
+
+[原始来源](https://example.com)
+```
+
+在 `_config.yml` 修改博客名称和描述，在 `about.md` 修改关于页面。提交后可在仓库的 Actions 标签查看发布进度。
