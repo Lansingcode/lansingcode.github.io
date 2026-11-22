@@ -1,4 +1,4 @@
-# AI 观察
+# 向量脉冲
 
 一个使用 Jekyll Minima 主题的中文博客。GitHub Pages 发布时从 `main` 分支的根目录构建。
 
